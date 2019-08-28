@@ -6,10 +6,13 @@ const TokgenNavbar = props => {
   return (
     <Menu pointing secondary>
       <Link to="/">
-        <Menu.Item name="home" active={props.currentPath === "/"} />
+        <Menu.Item name="home" active={props.location === "/"} />
       </Link>
       <Link to="/data">
-        <Menu.Item name="enter-data" active={props.currentPath === "/data"} />
+        <Menu.Item name="enter-data" active={props.location === "/data"} />
+      </Link>
+      <Link to="/token">
+        <Menu.Item name="token" active={props.location === "/token"} />
       </Link>
     </Menu>
   );

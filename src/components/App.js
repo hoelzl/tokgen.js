@@ -4,21 +4,38 @@ import { Container } from "semantic-ui-react";
 import TokgenNavbar from "./TokgenNavbar";
 import Home from "./Home";
 import DataForm from "./DataForm";
+import ThankYou from "./ThankYou";
 
 class App extends React.Component {
-  state = { currentPath: "/data" };
+  state = { currentToken: undefined };
 
-  setPath = newPath => {
-    this.setState({ currentPath: newPath });
+  setToken = newToken => {
+    setTimeout(() => this.setState({ currentToken: newToken }), 1000);
+  };
+
+  clearToken = () => {
+    this.setState({ currentToken: undefined });
   };
 
   render() {
     return (
       <Router>
         <Container text>
-          <TokgenNavbar active={this.state.currentPath} />
+          <TokgenNavbar />
           <Route exact path="/" render={props => <Home />} />
-          <Route path="/data" render={props => <DataForm />} />
+          <Route
+            path="/data"
+            render={props => <DataForm onNewToken={this.setToken} />}
+          />
+          <Route
+            path="/token"
+            render={props => (
+              <ThankYou
+                token={this.state.currentToken}
+                clearToken={this.clearToken}
+              />
+            )}
+          />
         </Container>
       </Router>
     );
